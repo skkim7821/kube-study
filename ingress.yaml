@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: symphony-ingress
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+spec:
+  rules:
+  - host: dashboard.skkim.me
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dashboard-service
+          servicePort: 80
