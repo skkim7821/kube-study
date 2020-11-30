@@ -15,10 +15,10 @@ spec:
         app: dashboard
     spec:
       containers:
-        - name: dashboard
-          image: skkim7821/dashboard
-          ports:
-            - containerPort: 80
+      - name: dashboard
+        image: skkim7821/dashboard
+        ports:
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -31,4 +31,4 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 30007
+    nodePort: 30080
