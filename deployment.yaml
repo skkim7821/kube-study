@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dashboard-deployment
-  labels:
-    app: dashboard
+  name: dashboard
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: dashboard
+  replicas: 2
   template:
     metadata:
       labels:
         app: dashboard
     spec:
       containers:
-      - name: dashboard
-        image: skkim7821/dashboard
-        ports:
-        - containerPort: 80
+        - name: dashboard
+          image: skkim7821/dashboard
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -26,9 +26,10 @@ metadata:
   name: dashboard-service
 spec:
   type: NodePort
+  ports: 
+    - port: 8080
+      targetPort: 80
+      protocol: TCP
+      nodePort: 30080
   selector:
     app: dashboard
-  ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30080

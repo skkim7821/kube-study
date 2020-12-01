@@ -1,14 +1,17 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: symphony-ingress
   annotations:
     kubernetes.io/ingress.class: haproxy
+    ngress.kubernetes.io/rewrite-target: /
+  name: hello-ingress
+  namespace: default
 spec:
   rules:
-  - http:
+  - host: dashboard.skkim.me
+    http:
       paths:
       - path: /
         backend:
           serviceName: dashboard-service
-          servicePort: 80
+          servicePort: 8080
